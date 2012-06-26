@@ -75,10 +75,13 @@ class MarkdownPreviewCommand(sublime_plugin.TextCommand):
         html_contents += '<html><head><meta charset="%s">' % encoding
         styles = self.getCSS()
         html_contents += '<style>%s</style>' % styles
+        html_contents += '<link rel="stylesheet" href="http://yandex.st/highlightjs/5.16/styles/default.min.css">'
+        html_contents += '<script src="http://yandex.st/highlightjs/5.16/highlight.min.js"></script>'
         if livereload_installed:
             html_contents += '<script>document.write(\'<script src="http://\' + (location.host || \'localhost\').split(\':\')[0] + \':35729/livereload.js?snipver=1"></\' + \'script>\')</script>'
         html_contents += '</head><body>'
         html_contents += markdown_html
+        html_contents += '<script type="text/javascript">hljs.tabReplace = \'  \'; hljs.initHighlightingOnLoad();</script>'
         html_contents += '</body>'
 
         if target in ['disk', 'browser']:
